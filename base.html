@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+</head>
+<body>
+  <script>
+  function computerPlay()
+  {
+    let computerMove = Math.random() * 3
+    if(computerMove == 0)
+    {
+      return "PAPER"
+    }
+    else if (computerMove == 1)
+    {
+      return "ROCK"
+    }
+    return "SCISSOR"
+  }
+
+  function getUserMove()
+  {
+    let response = prompt("paper, rock or scissor")
+    return response.toUpperCase()
+  }
+
+  function playRound(playerSelection, computerSelection) {
+    if(playerSelection == computerSelection)
+    {
+      return "It's a draw"
+    }
+    if((playerSelection == "SCISSOR" && computerSelection == "PAPER")
+    ||playerSelection == "ROCK" && computerSelection == "SCISSOR"
+    ||playerSelection == "PAPER" && computerSelection == "ROCK")
+    {
+        return `You Win! ${playerSelection} beats ${computerSelection}!`
+    }
+    return `Computer Win! ${computerSelection} beats ${playerSelection}!`
+  }
+
+  console.log(playRound(getUserMove(), computerPlay()))
+
+
+  </script>
+</body>
+</html>
