@@ -38,8 +38,11 @@
     }
     return `Computer Win! ${computerSelection} beats ${playerSelection}!`
   }
-
-  console.log(playRound(getUserMove(), computerPlay()))
+  let userSelection = getUserMove()
+  let computerSelection = computerPlay()
+  console.log(`User Move: ${userSelection}`)
+  console.log(`Computer Moce: ${computerSelection}`)
+  console.log(playRound(userSelection, computerSelection))
 
 
   </script>
