@@ -28,21 +28,73 @@
   function playRound(playerSelection, computerSelection) {
     if(playerSelection == computerSelection)
     {
-      return "It's a draw"
+      return {result:0,
+          playerSelection:null,
+          computerSelection:null,};
     }
     if((playerSelection == "SCISSOR" && computerSelection == "PAPER")
-    ||playerSelection == "ROCK" && computerSelection == "SCISSOR"
-    ||playerSelection == "PAPER" && computerSelection == "ROCK")
+    ||(playerSelection == "ROCK" && computerSelection == "SCISSOR")
+    ||(playerSelection == "PAPER" && computerSelection == "ROCK"))
     {
-        return `You Win! ${playerSelection} beats ${computerSelection}!`
+        return {"result":1, "playerSelection": playerSelection, "computerSelection": computerSelection,};
     }
-    return `Computer Win! ${computerSelection} beats ${playerSelection}!`
+    return {"result":-1, "playerSelection": playerSelection, "computerSelection": computerSelection,};
   }
-  let userSelection = getUserMove()
-  let computerSelection = computerPlay()
-  console.log(`User Move: ${userSelection}`)
-  console.log(`Computer Moce: ${computerSelection}`)
-  console.log(playRound(userSelection, computerSelection))
+
+  function printRoundResult(result)
+  {
+      let winner = result.result
+      let playerSelection = result.playerSelection
+      let computerSelection = result.computerSelection
+      if(winner == 1)
+      {
+          console.log(`You Win! ${playerSelection} beats over ${computerSelection}`)
+      }
+      else if(winner == -1)
+      {
+          console.log(`Computer Win! ${computerSelection} beats over ${playerSelection}`)
+      }
+      else {
+          console.log("It's a draw")
+      }
+
+  }
+  function game()
+  {
+      let i;
+      let computerWin = 0
+      let userWin = 0
+      for(i = 0; i <= 4; i++)
+      {
+          let userSelection = getUserMove()
+          let computerSelection = computerPlay()
+          console.log(`User Move: ${userSelection}`)
+          console.log(`Computer Moce: ${computerSelection}`)
+          let result = playRound(userSelection, computerSelection)
+          printRoundResult(result)
+          if(result == -1)
+          {
+              computerWin++
+          }
+          else if(result == 1)
+          {
+              userWin++
+          }
+      }
+      if(userWin > computerWin)
+      {
+          console.log(`Game ended! You win!`)
+      }
+      else if(computerWin > userWin)
+      {
+          console.log(`Game ended! You lose!`)
+      }
+      else
+      {
+          console.log("Game ended! It's a draw!")
+      }
+  }
+  game()
 
 
   </script>
