@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Paper Rock Scissor</title>
 </head>
 <body>
   <div id="playPanel">
@@ -16,11 +16,14 @@
   <style>
     html
     {
+      background-color: black;
+      color:white;
       text-align: center;
+      font-family: monospace;
     }
     body {
       margin: 0;
-      font-size: 1rem;
+      font-size: 2rem;
       min-height: 100vh;
       align-items: center;
     }
@@ -54,6 +57,10 @@
     button[value="PAPER"]
     {
       background-image: url("https://img.icons8.com/material/96/000000/hand--v1.png");
+    }
+    #resultPanel
+    {
+      font-size: 1.5rem;
     }
   </style>
   <script>
@@ -136,12 +143,15 @@
       playRoundDOM(btn.value);
       if(round == 5)
       {
+        let texts = document.querySelectorAll('#resultPanel>p');
+        texts.forEach((t)=>{t.style.opacity = 0.5;});
         buttons.forEach((btn)=>{
           btn.disabled = true;
           btn.style.opacity = 0.5;
         });
-        let resetBtn = document.createElement("button");
+        let resetBtn = document.createElement('button');
         resetBtn.textContent = "reset";
+        resetBtn.style.opacity = 1;
         resetBtn.onclick = () =>
         {buttons.forEach((btn)=>{
           btn.disabled = false;
