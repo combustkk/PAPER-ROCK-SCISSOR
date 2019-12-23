@@ -4,26 +4,77 @@
   <title>Page Title</title>
 </head>
 <body>
+  <div id="playPanel">
+    <button value="SCISSOR"></button>
+    <button value="ROCK"></button>
+    <button value="PAPER"></button>
+  </div>
+  <div id="winsText">You Win: 0</div>
+  <div id="resultPanel">
+  </div>
+
+  <style>
+    html
+    {
+      text-align: center;
+    }
+    body {
+      margin: 0;
+      font-size: 1rem;
+      min-height: 100vh;
+      align-items: center;
+    }
+    #playPanel
+    {
+      height:100px;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #playPanel button
+    {
+      margin: 10px;
+      -webkit-appearance: none;
+      height: 70px;
+      width: 70px;
+      border-radius: 20px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      opacity: 1;
+    }
+    button[value="SCISSOR"]
+    {
+      background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-scissors.png");
+    }
+    button[value="ROCK"]
+    {
+      background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-rock.png");
+    }
+    button[value="PAPER"]
+    {
+      background-image: url("https://img.icons8.com/material/96/000000/hand--v1.png");
+    }
+  </style>
   <script>
+  let resultPanel = document.getElementById("resultPanel");
+  let round = 0;
+  let wins = 0;
+  let winsText = document.getElementById("winsText");
   function computerPlay()
   {
-    let computerMove = Math.random() * 3
+    let computerMove = Math.floor(Math.random() * 3);
     if(computerMove == 0)
     {
-      return "PAPER"
+      return "PAPER";
     }
     else if (computerMove == 1)
     {
-      return "ROCK"
+      return "ROCK";
     }
-    return "SCISSOR"
+    return "SCISSOR";
   }
 
-  function getUserMove()
-  {
-    let response = prompt("paper, rock or scissor")
-    return response.toUpperCase()
-  }
 
   function playRound(playerSelection, computerSelection) {
     if(playerSelection == computerSelection)
@@ -48,53 +99,65 @@
       let computerSelection = result.computerSelection
       if(winner == 1)
       {
-          console.log(`You Win! ${playerSelection} beats over ${computerSelection}`)
+          return `You Win! ${playerSelection} beats over ${computerSelection}`;
       }
       else if(winner == -1)
       {
-          console.log(`Computer Win! ${computerSelection} beats over ${playerSelection}`)
+          return `Computer Win! ${computerSelection} beats over ${playerSelection}`;
       }
       else {
-          console.log("It's a draw")
+          return "It's a draw";
       }
 
   }
-  function game()
+
+  function playRoundDOM(btnValue)
   {
-      let i;
-      let computerWin = 0
-      let userWin = 0
-      for(i = 0; i <= 4; i++)
-      {
-          let userSelection = getUserMove()
-          let computerSelection = computerPlay()
-          console.log(`User Move: ${userSelection}`)
-          console.log(`Computer Moce: ${computerSelection}`)
-          let result = playRound(userSelection, computerSelection)
-          printRoundResult(result)
-          if(result == -1)
-          {
-              computerWin++
-          }
-          else if(result == 1)
-          {
-              userWin++
-          }
-      }
-      if(userWin > computerWin)
-      {
-          console.log(`Game ended! You win!`)
-      }
-      else if(computerWin > userWin)
-      {
-          console.log(`Game ended! You lose!`)
-      }
-      else
-      {
-          console.log("Game ended! It's a draw!")
-      }
+    round++;
+    let resultList = playRound(btnValue, computerPlay());
+    if(resultList.result == 1)
+    {
+      wins++;
+      winsText.textContent = `You Win: ${wins}`;
+    }
+    const result = printRoundResult(resultList);
+    let resultText = document.createElement("p");
+    resultText.textContent = result;
+    resultPanel.appendChild(resultText);
   }
-  game()
+
+
+
+  const buttons = document.querySelectorAll('div>button');
+  buttons.forEach((btn)=>
+  {
+    btn.addEventListener('click',()=>
+    {
+      playRoundDOM(btn.value);
+      if(round == 5)
+      {
+        buttons.forEach((btn)=>{
+          btn.disabled = true;
+          btn.style.opacity = 0.5;
+        });
+        let resetBtn = document.createElement("button");
+        resetBtn.textContent = "reset";
+        resetBtn.onclick = () =>
+        {buttons.forEach((btn)=>{
+          btn.disabled = false;
+          btn.style.opacity = 1;
+        });
+          resultPanel.innerHTML = "";
+          round = 0;
+          wins = 0;
+          winsText.textContent = `You Win: ${wins}`;
+        };
+        resultPanel.appendChild(resetBtn);
+      }
+    });
+  });
+
+  //game()
 
 
   </script>
