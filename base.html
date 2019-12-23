@@ -5,9 +5,9 @@
 </head>
 <body>
   <div id="playPanel">
-    <button value="SCISSOR"></button>
-    <button value="ROCK"></button>
-    <button value="PAPER"></button>
+    <button value="SCISSOR">SCISSOR</button>
+    <button value="ROCK">ROCK</button>
+    <button value="PAPER">PAPER</button>
   </div>
   <div id="winsText">You Win: 0</div>
   <div id="resultPanel">
@@ -16,15 +16,23 @@
   <style>
     html
     {
+      margin: 0px;
+      height: 100%;
+      width: 100%;
       background-color: black;
       color:white;
       text-align: center;
       font-family: monospace;
     }
+    #resultPanel
+    {
+      font-size: 1.5rem;
+    }
     body {
-      margin: 0;
+      margin: 0px;
+      height: 100%;
+      width: 100%;
       font-size: 2rem;
-      min-height: 100vh;
       align-items: center;
     }
     #playPanel
@@ -36,32 +44,40 @@
     }
     #playPanel button
     {
-      margin: 10px;
+      background-color: white;
+      color: black;
       -webkit-appearance: none;
+      margin: 10px;
       height: 70px;
       width: 70px;
       border-radius: 20px;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size = cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
       background-position: center;
       opacity: 1;
     }
-    button[value="SCISSOR"]
-    {
+    @media only screen and (min-width: 500px) {
+      #playPanel button
+      {
+        color: transparent;
+      }
+      button[value="SCISSOR"]
+      {
       background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-scissors.png");
+      }
+      button[value="ROCK"]
+      {
+        background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-rock.png");
+      }
+      button[value="PAPER"]
+      {
+        background-image: url("https://img.icons8.com/material/96/000000/hand--v1.png");
+      }
     }
-    button[value="ROCK"]
-    {
-      background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-rock.png");
-    }
-    button[value="PAPER"]
-    {
-      background-image: url("https://img.icons8.com/material/96/000000/hand--v1.png");
-    }
-    #resultPanel
-    {
-      font-size: 1.5rem;
-    }
+
   </style>
   <script>
   let resultPanel = document.getElementById("resultPanel");
