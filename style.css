@@ -1,0 +1,63 @@
+html
+{
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  color:white;
+  text-align: center;
+  font-family: monospace;
+}
+#resultPanel
+{
+  font-size: 1.5rem;
+}
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  font-size: 2rem;
+  align-items: center;
+}
+#playPanel
+{
+  height:100px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+#playPanel button
+{
+  background-color: white;
+  color: black;
+  -webkit-appearance: none;
+  margin: 10px;
+  height: 70px;
+  width: 70px;
+  border-radius: 20px;
+  background-repeat: no-repeat;
+  background-size = cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-position: center;
+  opacity: 1;
+}
+@media only screen and (min-width: 500px) {
+  #playPanel button
+  {
+    color: transparent;
+  }
+  button[value="SCISSOR"]
+  {
+  background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-scissors.png");
+  }
+  button[value="ROCK"]
+  {
+    background-image: url("https://img.icons8.com/ios-filled/100/000000/hand-rock.png");
+  }
+  button[value="PAPER"]
+  {
+    background-image: url("https://img.icons8.com/material/96/000000/hand--v1.png");
+  }
+}
